@@ -8,18 +8,24 @@ class SearchWidget extends StatefulWidget {
 }
 
 class _SearchWidgetState extends State<SearchWidget> {
+  bool isDark = true;
+  final TextEditingController _controller = TextEditingController();
+
+  void search(String keyword) {
+    //TODO: Implement search logic
+    print('Submitted text: $keyword');
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool isDark = false;
-    final controller = TextEditingController();
-    final ThemeData themeData = ThemeData(
+    ThemeData themeData = ThemeData(
         useMaterial3: true,
-        brightness: isDark ? Brightness.light : Brightness.dark);
+        brightness: isDark ? Brightness.dark : Brightness.light);
 
     return MaterialApp(
         theme: themeData,
         home: Scaffold(
-            appBar: AppBar(title: const Text('Search Bar Sample')),
+            appBar: AppBar(title: const Text('Welcome to MusicDB!')),
             body: Padding(
                 padding: const EdgeInsets.all(8.0),
                 // child: SearchAnchor(
@@ -27,22 +33,29 @@ class _SearchWidgetState extends State<SearchWidget> {
                 child: Center(
                   child: SearchBar(
                     hintText: 'Search song or artist',
-                    controller: controller,
+                    controller: _controller,
                     padding: const MaterialStatePropertyAll<EdgeInsets>(
                         EdgeInsets.symmetric(horizontal: 16.0)
                     ),
                     onSubmitted: (String value) {
+                      search(value);
                     },
-                    onTap: () {
-                      print('Tapped');
-                      // controller.openView();
-                    },
-                    onChanged: (_) {
-                    // controller.openView();
-                    },
-                    leading: const Icon(Icons.search),
-                    trailing: <Widget>[
-                      Tooltip(
+                    leading: IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {
+                          search(_controller.text);
+                        },
+                    ),
+                    trailing:
+                    <Widget>[
+                      IconButton (
+                      icon: const Icon(Icons.clear),
+                      onPressed: () {
+                        _controller.clear();
+                      },
+                    )
+                      //TODO: Add the theme icon to the app bar
+                      /*Tooltip(
                         message: 'Change brightness mode',
                         child: IconButton(
                           isSelected: isDark,
@@ -56,17 +69,12 @@ class _SearchWidgetState extends State<SearchWidget> {
                           icon: const Icon(Icons.wb_sunny_outlined),
                           selectedIcon: const Icon(Icons.brightness_2_outlined),
                         ),
-                      )
+                      )*/
                     ],
                   ),
                 )
-              // },
-              // suggestionsBuilder: (BuildContext context, SearchController controller) {
-              //   return null;
-              // }
             )
         )
     );
   }
 }
-    // );
