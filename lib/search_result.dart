@@ -23,11 +23,11 @@ class SearchResult extends StatelessWidget {
                       Text(snapshot.data!.name),
                       Text(snapshot.data!.sortName),
                       Text(snapshot.data!.type!),
-                      // Text(snapshot.data!.country!)
+                      Text(snapshot.data!.country!)
                     ],
                   );
                 } else if (snapshot.hasError) {
-                  return Text('API call failed with error ${snapshot.error}');
+                  return Text('${snapshot.error}');
                 }
                 else {
                   return const Padding(
