@@ -12,8 +12,7 @@ class _SearchWidgetState extends State<SearchWidget> {
   final TextEditingController _controller = TextEditingController();
 
   void search(String keyword) {
-    //TODO: Implement search logic
-    print('Submitted text: $keyword');
+    Navigator.pushNamed(context, '/search-result', arguments: keyword);
   }
 
   @override

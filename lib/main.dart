@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:music_db/search_widget.dart';
+import 'package:music_db/search_result.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'MusicDB App',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -33,7 +34,9 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SearchWidget(),
+      routes: {
+        '/search-result': (context) => const SearchResult()
+      },
     );
   }
 }
-
