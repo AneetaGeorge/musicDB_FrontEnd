@@ -27,7 +27,7 @@ Map<String, dynamic> _$ArtistToJson(Artist instance) => <String, dynamic>{
       'country': instance.country,
       'gender': instance.gender,
       'disambiguation': instance.disambiguation,
-      // 'aliases': instance.aliases,
+      'aliases': instance.aliases?.map((e) => e.toJson()).toList(),
     };
 
 Alias _$AliasFromJson(Map<String, dynamic> json) => Alias(
