@@ -9,9 +9,9 @@ part of 'release_group.dart';
 ReleaseGroup _$ReleaseGroupFromJson(Map<String, dynamic> json) => ReleaseGroup(
       id: json['id'] as String,
       title: json['title'] as String,
-      primaryType: json['primary-type'] as String,
+      primaryType: json['primary-type'] as String?,
       secondaryType: json['secondary-type'] as String?,
-      firstReleaseDate: json['first-release-date'] as String,
+      firstReleaseDate: json['first-release-date'] as String?,
     );
 
 Map<String, dynamic> _$ReleaseGroupToJson(ReleaseGroup instance) =>

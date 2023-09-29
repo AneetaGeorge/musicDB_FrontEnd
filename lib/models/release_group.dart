@@ -6,14 +6,14 @@ class ReleaseGroup {
   String id;
   String title;
   @JsonKey(name: 'primary-type')
-  String primaryType;
+  String? primaryType;
   @JsonKey(name: 'secondary-type')
   String? secondaryType;
   @JsonKey(name: 'first-release-date')
-  String firstReleaseDate;
+  String? firstReleaseDate;
   //TODO: Add Artist credit attribute
 
-  ReleaseGroup({required this.id, required this.title, required this.primaryType, required this.secondaryType, required this.firstReleaseDate});
+  ReleaseGroup({required this.id, required this.title, this.primaryType, this.secondaryType, this.firstReleaseDate});
 
   factory ReleaseGroup.fromJson(Map<String, dynamic> json) => _$ReleaseGroupFromJson(json);
 
