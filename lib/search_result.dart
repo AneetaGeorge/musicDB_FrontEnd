@@ -17,45 +17,44 @@ class SearchResult extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(),
-        body: Center(
-          child : Column(
-            children: [
-              FutureBuilder<Artist>(
-                  future: artistRepo.getArtistDetails(keyword),
-                  builder: (BuildContext context, AsyncSnapshot<Artist> snapshot) {
-                    if (snapshot.hasData) {
-                      return ArtistWidget(artist: snapshot.data!);
-                    } else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }
-                    else {
-                      return const ProgressWidget();
-                    }
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            FutureBuilder<Artist>(
+                future: artistRepo.getArtistDetails(keyword),
+                builder: (BuildContext context, AsyncSnapshot<Artist> snapshot) {
+                  if (snapshot.hasData) {
+                    return ArtistWidget(artist: snapshot.data!);
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
                   }
-              ),
-              FutureBuilder<List<ReleaseGroup>>(
-                            future: artistRepo.getArtistAlbums(keyword),
-                            builder: (BuildContext context, AsyncSnapshot<List<ReleaseGroup>> snapshot) {
-                              if (snapshot.hasData) {
-                                return Expanded(
-                                  child: ListView.builder(
-                                      itemCount: snapshot.data!.length,
-                                      itemBuilder: (BuildContext context, int index) {
-                                        return AlbumWidget(album: snapshot.data![index]);
-                                      }
-                                  ),
-                                );
-                              }
-                              else if (snapshot.hasError) {
-                                return Text('${snapshot.error}');
-                              }
-                              else {
-                                return const ProgressWidget();
-                              }
+                  else {
+                    return const ProgressWidget();
+                  }
+                }
+            ),
+            FutureBuilder<List<ReleaseGroup>>(
+                          future: artistRepo.getArtistAlbums(keyword),
+                          builder: (BuildContext context, AsyncSnapshot<List<ReleaseGroup>> snapshot) {
+                            if (snapshot.hasData) {
+                              return Expanded(
+                                child: ListView.builder(
+                                    itemCount: snapshot.data!.length,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      return AlbumWidget(album: snapshot.data![index]);
+                                    }
+                                ),
+                              );
                             }
-              )
-            ],
-          ),
+                            else if (snapshot.hasError) {
+                              return Text('${snapshot.error}');
+                            }
+                            else {
+                              return const ProgressWidget();
+                            }
+                          }
+            )
+          ],
         )
       )
     );

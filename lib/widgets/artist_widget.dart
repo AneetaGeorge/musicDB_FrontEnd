@@ -9,10 +9,15 @@ class ArtistWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
         children: [
-        Text(artist.name),
-        Text(artist.sortName),
-        Text(artist.type!),
-        Text(artist.country!)
+        Text(
+            artist.name,
+            style: TextStyle(
+              fontSize: 30
+            ),
+        ),
+        // Text(artist.sortName),
+        // Text(artist.type!),
+        // Text(artist.country!)
       ],
     );
   }
