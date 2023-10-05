@@ -10,7 +10,7 @@ Release _$ReleaseFromJson(Map<String, dynamic> json) => Release(
       id: json['id'] as String,
       title: json['title'] as String,
       status: json['status'] as String,
-      date: json['date'] as String,
+      date: json['date'] as String?,
       country: json['country'] as String,
       trackCount: json['track-count'] as int,
       releaseGroup:

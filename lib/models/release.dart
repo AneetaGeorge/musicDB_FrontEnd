@@ -7,7 +7,7 @@ class Release {
   String id;
   String title;
   String status;
-  String date;
+  String? date;
   String country;
   @JsonKey(name: 'track-count')
   int trackCount;
@@ -16,7 +16,7 @@ class Release {
 
   //TODO: Add Artist credit attribute
 
-  Release({required this.id, required this.title, required this.status, required this.date, required this.country, required this.trackCount, required this.releaseGroup});
+  Release({required this.id, required this.title, required this.status, this.date, required this.country, required this.trackCount, required this.releaseGroup});
 
   factory Release.fromJson(Map<String, dynamic> json) => _$ReleaseFromJson(json);
 

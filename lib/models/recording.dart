@@ -6,13 +6,15 @@ part 'recording.g.dart';
 class Recording {
   String id;
   String title;
-  int length;
+  int? length;
   @JsonKey(name: 'first-release-date')
-  String firstReleaseDate;
-  List<Release> releases;
+  String? firstReleaseDate;
+  // List<Release> releases;
   //TODO add Artist Credit attribute
 
-  Recording({required this.id, required this.title, required this.length, required this.firstReleaseDate, required this.releases});
+  // Recording({required this.id, required this.title, this.length, this.firstReleaseDate, required this.releases});
+
+  Recording({required this.id, required this.title, this.length, this.firstReleaseDate});
 
   factory Recording.fromJson(Map<String, dynamic> json) => _$RecordingFromJson(json);
 
