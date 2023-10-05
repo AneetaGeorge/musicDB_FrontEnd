@@ -11,7 +11,7 @@ class ArtistWidget extends StatelessWidget {
         children: [
         Text(
             artist.name,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 30
             ),
         ),
