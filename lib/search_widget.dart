@@ -21,9 +21,7 @@ class _SearchWidgetState extends State<SearchWidget> {
         useMaterial3: true,
         brightness: isDark ? Brightness.dark : Brightness.light);
 
-    return MaterialApp(
-        theme: themeData,
-        home: Scaffold(
+    return Scaffold(
             appBar: AppBar(title: const Text('Welcome to MusicDB!')),
             body: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -73,7 +71,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ),
                 )
             )
-        )
-    );
+        );
   }
 }
