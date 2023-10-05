@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:music_db/album_details.dart';
+import 'package:music_db/models/release_group.dart';
 import 'package:music_db/search_widget.dart';
 import 'package:music_db/search_result.dart';
 
@@ -34,8 +36,32 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SearchWidget(),
-      routes: {
-        '/search-result': (context) => const SearchResult()
+      // routes: {
+      //   '/search-result': (context) => SearchResult()
+      // },
+      onGenerateRoute: (settings) {
+        if (settings.name == '/album-details') {
+          final args = settings.arguments as ReleaseGroup;
+          return MaterialPageRoute(
+            builder: (context) {
+              return AlbumDetails(
+                  album: args
+              );
+            },
+          );
+        }
+
+        else if (settings.name == '/search-result') {
+          final args = settings.arguments as String;
+          return MaterialPageRoute(
+            builder: (context) {
+              return SearchResult(
+                keyword: args
+              );
+            },
+          );
+        }
+
       },
     );
   }
