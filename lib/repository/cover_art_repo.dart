@@ -3,8 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:music_db/models/cover_art.dart';
 
 class CoverArtRepo {
-  static Future<List<CoverArt>> getReleaseGroupCovertArt(String mbId) async {
-    Uri uri = Uri.parse('http://coverartarchive.org/release-group/$mbId');
+  static Future<List<CoverArt>> _getCoverArt(Uri uri, String mbId) async {
     try {
       final response = await http.get(uri);
       if (response.statusCode == 200) {
@@ -25,4 +24,13 @@ class CoverArtRepo {
       rethrow;
     }
   }
-}
+  static Future<List<CoverArt>> getReleaseGroupCovertArt(String mbId) {
+    Uri uri = Uri.parse('http://coverartarchive.org/release-group/$mbId');
+    return _getCoverArt(uri, mbId);
+  }
+
+  static Future<List<CoverArt>> getReleaseCoverArt(String mbId) {
+    Uri uri = Uri.parse('http://coverartarchive.org/release-group/$mbId');
+    return _getCoverArt(uri, mbId);
+    }
+  }
