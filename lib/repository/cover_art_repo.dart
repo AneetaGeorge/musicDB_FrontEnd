@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:music_db/models/cover_art.dart';
 
 class CoverArtRepo {
-  Future<List<CoverArt>> getReleaseGroupCovertArt(String mbId) async {
+  static Future<List<CoverArt>> getReleaseGroupCovertArt(String mbId) async {
     Uri uri = Uri.parse('http://coverartarchive.org/release-group/$mbId');
     try {
       final response = await http.get(uri);
