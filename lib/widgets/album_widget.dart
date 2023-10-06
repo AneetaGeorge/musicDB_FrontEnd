@@ -37,37 +37,42 @@ class _AlbumWidgetState extends State<AlbumWidget> {
             },
             child: Row(
               children: [
-                FutureBuilder<List<CoverArt>>(
-                    future: coverFuture,
-                    builder: (BuildContext context, AsyncSnapshot<List<CoverArt>> snapshot) {
-                      if (snapshot.hasData) {
-                        return CachedNetworkImage(
-                          imageUrl: snapshot.data![0].image,
-                          // placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
-                          height: 150,
-                          width: 150,
-                        );
+                SizedBox(
+                  height: 150,
+                  width: 150,
+                  child: FutureBuilder<List<CoverArt>>(
+                      future: coverFuture,
+                      builder: (BuildContext context, AsyncSnapshot<List<CoverArt>> snapshot) {
+                        if (snapshot.hasData) {
+                          return CachedNetworkImage(
+                            imageUrl: snapshot.data![0].image,
+                            // placeholder: (context, url) => CircularProgressIndicator(),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+                            height: 150,
+                            width: 150,
+                          );
 
-                      // return Image.network(
-                        //   snapshot.data![0].image,
-                        //   height: 150,
-                        //   width: 150,
-                        // );
+                        // return Image.network(
+                          //   snapshot.data![0].image,
+                          //   height: 150,
+                          //   width: 150,
+                          // );
+                        }
+                        else if (snapshot.hasError) {
+                          // print('Error: ${snapshot.error} for album ${widget.album.title}');
+                          return CachedNetworkImage(
+                            imageUrl: 'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
+                            // placeholder: (context, url) => CircularProgressIndicator(),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+                            height: 150,
+                            width: 150,
+                          );
+                        }
+                        else {
+                          return const ProgressWidget();
+                        }
                       }
-                      else if (snapshot.hasError) {
-                        return CachedNetworkImage(
-                          imageUrl: 'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
-                          // placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error),
-                          height: 150,
-                          width: 150,
-                        );
-                      }
-                      else {
-                        return const ProgressWidget();
-                      }
-                    }
+                  ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 10.0),
