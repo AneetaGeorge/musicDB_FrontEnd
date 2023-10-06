@@ -3,14 +3,15 @@ part 'cover_art.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class CoverArt {
-  String? id;
+  //JSON Response from coverartarchive.org sometimes gives string, sometime int for id
+  dynamic id;
   bool approved;
   bool back;
   bool front;
   String image;
   //TODO: Add thumbnails attribute
 
-  CoverArt({this.id, required this.approved, required this.back, required this.front, required this.image});
+  CoverArt({ required this.id, required this.approved, required this.back, required this.front, required this.image});
 
   factory CoverArt.fromJson(Map<String, dynamic> json) => _$CoverArtFromJson(json);
 
