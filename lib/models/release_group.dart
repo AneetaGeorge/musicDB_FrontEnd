@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:music_db/models/release.dart';
 part 'release_group.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -12,8 +13,9 @@ class ReleaseGroup {
   @JsonKey(name: 'first-release-date')
   String? firstReleaseDate;
   //TODO: Add Artist credit attribute
+  List<Release>? releases;
 
-  ReleaseGroup({required this.id, required this.title, this.primaryType, this.secondaryType, this.firstReleaseDate});
+  ReleaseGroup({required this.id, required this.title, this.primaryType, this.secondaryType, this.firstReleaseDate, this.releases});
 
   factory ReleaseGroup.fromJson(Map<String, dynamic> json) => _$ReleaseGroupFromJson(json);
 
