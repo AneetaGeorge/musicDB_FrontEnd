@@ -14,9 +14,9 @@ Artist _$ArtistFromJson(Map<String, dynamic> json) => Artist(
       country: json['country'] as String?,
       gender: json['gender'] as String?,
       disambiguation: json['disambiguation'] as String?,
-      // aliases: (json['aliases'] as List<dynamic>?)
-      //     ?.map((e) => Alias.fromJson(e as Map<String, dynamic>))
-      //     .toList(),
+      aliases: (json['aliases'] as List<dynamic>?)
+          ?.map((e) => Alias.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$ArtistToJson(Artist instance) => <String, dynamic>{
@@ -32,10 +32,10 @@ Map<String, dynamic> _$ArtistToJson(Artist instance) => <String, dynamic>{
 
 Alias _$AliasFromJson(Map<String, dynamic> json) => Alias(
       sortName: json['sort-name'] as String,
-      typeId: json['typeId'] as String,
+      typeId: json['typeId'] as String?,
       name: json['name'] as String,
       locale: json['locale'] as String?,
-      type: json['type'] as String,
+      type: json['type'] as String?,
       primary: json['primary'] as bool?,
     );
 
