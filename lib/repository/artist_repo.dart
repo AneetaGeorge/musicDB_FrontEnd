@@ -29,7 +29,6 @@ class ArtistRepository {
 
   static Future<List<ReleaseGroup>> getArtistAlbums(String keyword) async {
     Uri url = Uri.parse('http://10.0.2.2:8001/api/artist/$keyword/albums');
-    print('Fetching artist album data');
     try {
       final response = await http.get(url);
 
