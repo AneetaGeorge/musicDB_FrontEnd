@@ -30,7 +30,7 @@ class CoverArtRepo {
   }
 
   static Future<List<CoverArt>> getReleaseCoverArt(String mbId) {
-    Uri uri = Uri.parse('http://coverartarchive.org/release-group/$mbId');
+    Uri uri = Uri.parse('http://coverartarchive.org/release/$mbId');
     return _getCoverArt(uri, mbId);
     }
   }
