@@ -9,12 +9,10 @@ part of 'release.dart';
 Release _$ReleaseFromJson(Map<String, dynamic> json) => Release(
       id: json['id'] as String,
       title: json['title'] as String,
-      status: json['status'] as String,
+      status: json['status'] as String?,
       date: json['date'] as String?,
-      country: json['country'] as String,
-      trackCount: json['track-count'] as int,
-      releaseGroup:
-          ReleaseGroup.fromJson(json['release-group'] as Map<String, dynamic>),
+      country: json['country'] as String?,
+      trackCount: json['track-count'] as int?,
     );
 
 Map<String, dynamic> _$ReleaseToJson(Release instance) => <String, dynamic>{
@@ -24,5 +22,4 @@ Map<String, dynamic> _$ReleaseToJson(Release instance) => <String, dynamic>{
       'date': instance.date,
       'country': instance.country,
       'track-count': instance.trackCount,
-      'release-group': instance.releaseGroup.toJson(),
     };

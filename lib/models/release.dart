@@ -1,4 +1,3 @@
-import 'package:music_db/models/release_group.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'release.g.dart';
 
@@ -6,17 +5,17 @@ part 'release.g.dart';
 class Release {
   String id;
   String title;
-  String status;
+  String? status;
   String? date;
-  String country;
+  String? country;
   @JsonKey(name: 'track-count')
-  int trackCount;
-  @JsonKey(name: 'release-group')
-  ReleaseGroup releaseGroup;
+  int? trackCount;
+  // @JsonKey(name: 'release-group')
+  // ReleaseGroup releaseGroup;
 
   //TODO: Add Artist credit attribute
 
-  Release({required this.id, required this.title, required this.status, this.date, required this.country, required this.trackCount, required this.releaseGroup});
+  Release({required this.id, required this.title, this.status, this.date, this.country, this.trackCount});
 
   factory Release.fromJson(Map<String, dynamic> json) => _$ReleaseFromJson(json);
 
