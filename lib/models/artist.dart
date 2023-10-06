@@ -26,13 +26,13 @@ class Artist {
 class Alias {
   @JsonKey(name: 'sort-name')
   String sortName;
-  String typeId;
+  String? typeId;
   String name;
   String? locale;
-  String type;
+  String? type;
   bool? primary;
 
-  Alias({required this.sortName, required this.typeId, required this.name, this.locale, required this.type, this.primary});
+  Alias({required this.sortName, this.typeId, required this.name, this.locale, this.type, this.primary});
 
   factory Alias.fromJson(Map<String, dynamic> json) => _$AliasFromJson(json);
 
