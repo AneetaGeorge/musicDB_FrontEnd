@@ -7,7 +7,7 @@ part of 'cover_art.dart';
 // **************************************************************************
 
 CoverArt _$CoverArtFromJson(Map<String, dynamic> json) => CoverArt(
-      // id: json['id'] as String,
+      id: json['id'],
       approved: json['approved'] as bool,
       back: json['back'] as bool,
       front: json['front'] as bool,
@@ -15,7 +15,7 @@ CoverArt _$CoverArtFromJson(Map<String, dynamic> json) => CoverArt(
     );
 
 Map<String, dynamic> _$CoverArtToJson(CoverArt instance) => <String, dynamic>{
-      // 'id': instance.id,
+      'id': instance.id,
       'approved': instance.approved,
       'back': instance.back,
       'front': instance.front,
