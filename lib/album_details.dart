@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:music_db/models/release_group.dart';
 import 'package:music_db/repository/artist_repo.dart';
 import 'package:music_db/widgets/progress_widget.dart';
-import 'package:music_db/widgets/track_widget.dart';
+import 'package:music_db/widgets/release_widget.dart';
 
 class AlbumDetails extends StatefulWidget {
   final ReleaseGroup album;
@@ -18,7 +18,7 @@ class _AlbumDetailsState extends State<AlbumDetails> {
   @override
   initState() {
     super.initState();
-    albumDetFuture = ArtistRepository.getAlbumTracks(widget.album);
+    albumDetFuture = ArtistRepository.getAlbumReleases(widget.album);
   }
 
   @override
@@ -37,7 +37,7 @@ class _AlbumDetailsState extends State<AlbumDetails> {
                       child: ListView.builder(
                           itemCount: snapshot.data!.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return TrackWidget(track: snapshot.data![index]);
+                            return ReleaseWidget(release: snapshot.data![index]);
                           }
                       ),
                     ),
