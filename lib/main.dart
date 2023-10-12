@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:music_db/album_details.dart';
+import 'package:music_db/models/release.dart';
 import 'package:music_db/models/release_group.dart';
+import 'package:music_db/release_details.dart';
 import 'package:music_db/search_widget.dart';
 import 'package:music_db/search_result.dart';
 
@@ -57,6 +59,17 @@ class MyApp extends StatelessWidget {
             builder: (context) {
               return SearchResult(
                 keyword: args
+              );
+            },
+          );
+        }
+
+        else if (settings.name == '/release-details') {
+          final args = settings.arguments as Release;
+          return MaterialPageRoute(
+            builder: (context) {
+              return ReleaseDetails(
+                  release: args
               );
             },
           );
