@@ -1,9 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:music_db/models/cover_art.dart';
 import 'package:music_db/models/release_group.dart';
 import 'package:music_db/repository/cover_art_repo.dart';
-import 'package:music_db/widgets/progress_widget.dart';
+import 'package:music_db/widgets/cover_art_widget.dart';
 
 class AlbumWidget extends StatefulWidget {
   final ReleaseGroup album;
@@ -22,7 +21,6 @@ class _AlbumWidgetState extends State<AlbumWidget> {
     coverFuture = CoverArtRepo.getReleaseGroupCovertArt(widget.album.id);
   }
 
-
   @override
   Widget build(BuildContext context) {
 
@@ -37,43 +35,7 @@ class _AlbumWidgetState extends State<AlbumWidget> {
             },
             child: Row(
               children: [
-                SizedBox(
-                  height: 150,
-                  width: 150,
-                  child: FutureBuilder<List<CoverArt>>(
-                      future: coverFuture,
-                      builder: (BuildContext context, AsyncSnapshot<List<CoverArt>> snapshot) {
-                        if (snapshot.hasData) {
-                          return CachedNetworkImage(
-                            imageUrl: snapshot.data![0].image,
-                            // placeholder: (context, url) => CircularProgressIndicator(),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
-                            height: 150,
-                            width: 150,
-                          );
-
-                        // return Image.network(
-                          //   snapshot.data![0].image,
-                          //   height: 150,
-                          //   width: 150,
-                          // );
-                        }
-                        else if (snapshot.hasError) {
-                          // print('Error: ${snapshot.error} for album ${widget.album.title}');
-                          return CachedNetworkImage(
-                            imageUrl: 'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
-                            // placeholder: (context, url) => CircularProgressIndicator(),
-                            errorWidget: (context, url, error) => Icon(Icons.error),
-                            height: 150,
-                            width: 150,
-                          );
-                        }
-                        else {
-                          return const ProgressWidget();
-                        }
-                      }
-                  ),
-                ),
+                CoverArtWidget(coverFuture: coverFuture),
                 Container(
                   padding: const EdgeInsets.only(left: 10.0),
                   child: Column(
