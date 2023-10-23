@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:music_db/widgets/progress_widget.dart';
+import 'package:music_db/widgets/rounded_image_widget.dart';
 
 class CoverArtWidget extends StatelessWidget {
   final Future coverFuture;
@@ -19,18 +20,16 @@ class CoverArtWidget extends StatelessWidget {
               return CachedNetworkImage(
                 imageUrl: snapshot.data![0].image,
                 // placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-                height: height,
-                width: width,
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                imageBuilder: (context, imageProvider) => RoundedImageWidget(imageProvider: imageProvider, height: height, width: width)
               );
             }
             else if (snapshot.hasError) {
               return CachedNetworkImage(
                 imageUrl: 'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
                 // placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Icon(Icons.error),
-                height: height,
-                width: width,
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                imageBuilder: (context, imageProvider) => RoundedImageWidget(imageProvider: imageProvider, height: height, width: width)
               );
             }
             else {
