@@ -35,7 +35,6 @@ class _ReleaseWidgetState extends State<ReleaseWidget> {
               Text('${widget.release.trackCount}'),
               Text('${widget.release.date}'),
               Text('${widget.release.country}'),
-              Text(widget.release.id)
             ],
           ),
         ],
