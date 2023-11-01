@@ -12,6 +12,7 @@ class Artist {
   String? gender;
   String? disambiguation;
   List<Alias>? aliases;
+  String? imageUrl;
 
   Artist({required this.id, required this.name, required this.sortName, this.type, this.country, this.gender, this.disambiguation, this.aliases});
   // Artist({required this.id, required this.name, required this.sortName, this.type, this.country, this.gender, this.disambiguation});
