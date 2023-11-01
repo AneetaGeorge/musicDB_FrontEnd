@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:music_db/models/artist.dart';
 
 class ArtistWidget extends StatelessWidget {
-  Artist artist;
-  ArtistWidget({super.key, required this.artist});
+  final Artist artist;
+  const ArtistWidget({super.key, required this.artist});
 
   @override
   Widget build(BuildContext context) {
