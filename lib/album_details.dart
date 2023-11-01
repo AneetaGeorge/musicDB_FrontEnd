@@ -48,7 +48,9 @@ class _AlbumDetailsState extends State<AlbumDetails> {
                 return Center(child: Text('$snapshot.error'));
               }
               else
-                return const ProgressWidget();
+                {
+                  return const ProgressWidget();
+                }
             },
           ),
         )

@@ -1,4 +1,3 @@
-import 'package:music_db/models/release.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'recording.g.dart';
 

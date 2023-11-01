@@ -17,9 +17,10 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData themeData = ThemeData(
-        useMaterial3: true,
-        brightness: isDark ? Brightness.dark : Brightness.light);
+    //TODO: Add settings to change theme
+    // ThemeData themeData = ThemeData(
+    //     useMaterial3: true,
+    //     brightness: isDark ? Brightness.dark : Brightness.light);
 
     return Scaffold(
             appBar: AppBar(title: const Text('Welcome to MusicDB!')),
