@@ -25,54 +25,59 @@ class _ReleaseDetailsState extends State<ReleaseDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-        appBar: AppBar(
-          // leading: Card(
-          flexibleSpace: FutureBuilder(
-            future: coverImgFuture,
-            builder: (BuildContext context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return Image.network(snapshot.data![0].image,
-                        fit: BoxFit.fitWidth);
-              }
-              else {
-                return Container(
-                  height: 200,
-                );
-              }
-            },
+     final sliverAppBar = SliverAppBar(
+      stretchTriggerOffset: 300.0,
+      expandedHeight: 200.0,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text(widget.release.title),
+        background: FutureBuilder(
+                future: coverImgFuture,
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return Image.network(snapshot.data![0].image,
+                            fit: BoxFit.fitWidth);
+                  }
+                  //TODO: Add an alternate image in case image is not present
+                  else {
+                    return Container(
+                      height: 200,
+                    );
+                  }
+                },
 
-          ),
-          // ),
-        ),
-        body: Container(
-          padding: const EdgeInsets.all(5),
-          child: FutureBuilder(
+              )
+      ),
+    );
+
+    return Scaffold(
+        body: FutureBuilder(
             future: albumDetFuture,
             builder: (BuildContext context, AsyncSnapshot snapshot) {
+              Widget sliverList;
               if (snapshot.hasData) {
-                return Row(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return TrackWidget(track: snapshot.data![index], release: widget.release);
-                          }
-                      ),
-                    ),
-                  ],
+                sliverList = SliverList(
+                    delegate: SliverChildBuilderDelegate((BuildContext ctx, int index)
+                    {
+                      return TrackWidget(track: snapshot.data![index], release: widget.release);
+                    },
+                        childCount: snapshot.data!.length)
                 );
               }
               else if (snapshot.hasError) {
-                return Center(child: Text('$snapshot.error'));
+                sliverList = SliverToBoxAdapter(
+                    child: Text('${snapshot.error}'));
               }
               else {
-                return const ProgressWidget();
-                }
+                sliverList = const SliverToBoxAdapter(child: ProgressWidget());
               }
-          ),
+
+              return CustomScrollView(
+                slivers: <Widget>[
+                  sliverAppBar,
+                  sliverList
+                ],
+              );
+            }
         )
     );
   }

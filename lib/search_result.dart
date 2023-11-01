@@ -15,61 +15,73 @@ class SearchResult extends StatefulWidget {
 }
 
 class _SearchResultState extends State<SearchResult> {
-  late final Future<List<ReleaseGroup>> _artistRepoFuture;
+  late final Future<List<ReleaseGroup>> _albumFuture;
+  late final Future _artistFuture;
 
   @override
   void initState() {
     super.initState();
-    _artistRepoFuture = ArtistRepository.getArtistAlbums(widget.keyword);
+    _albumFuture = ArtistRepository.getArtistAlbums(widget.keyword);
+    _artistFuture = ArtistRepository.getArtistDetails(widget.keyword);
   }
 
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.keyword),
-          centerTitle: true,
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            // FutureBuilder<Artist>(
-            //     future: ArtistRepository.getArtistDetails(widget.keyword),
-            //     builder: (BuildContext context, AsyncSnapshot<Artist> snapshot) {
-            //       if (snapshot.hasData) {
-            //         return ArtistWidget(artist: snapshot.data!);
-            //       } else if (snapshot.hasError) {
-            //         return Text('${snapshot.error}');
-            //       }
-            //       else {
-            //         return const ProgressWidget();
-            //       }
-            //     }
-            // ),
-            FutureBuilder(
-                          future: _artistRepoFuture,
-                          builder: (BuildContext context, AsyncSnapshot snapshot) {
-                            if (snapshot.hasData) {
-                              return Expanded(
-                                child: ListView.builder(
-                                    itemCount: snapshot.data!.length,
-                                    itemBuilder: (BuildContext context, int index) {
-                                      return AlbumWidget(album: snapshot.data![index]);
-                                    }
-                                ),
-                              );
-                            }
-                            else if (snapshot.hasError) {
-                              return Text('${snapshot.error}');
-                            }
-                            else {
-                              return const ProgressWidget();
-                            }
-                          }
-            )
-          ],
+    final sliverAppBar = SliverAppBar(
+      stretchTriggerOffset: 300.0,
+      expandedHeight: 200.0,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text(widget.keyword),
+        background: FutureBuilder(
+          future: _artistFuture,
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return Image.network(snapshot.data!.imageUrl,
+                  fit: BoxFit.fill);
+            }
+            //TODO: Add an alternate image in case image is not present
+            else {
+              return Container(
+                height: 200,
+              );
+            }
+          },
         )
+      ),
+    );
+
+    return Scaffold(
+      body: FutureBuilder(
+        future: _albumFuture,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          Widget sliverList;
+          if (snapshot.hasData) {
+            sliverList = SliverList(
+                delegate: SliverChildBuilderDelegate((BuildContext ctx, int index)
+                          {
+                            return AlbumWidget(album: snapshot.data![index]);
+                          },
+                          childCount: snapshot.data!.length)
+            );
+          }
+          else if (snapshot.hasError) {
+              sliverList = SliverToBoxAdapter(
+                  child: Text('${snapshot.error}'));
+
+          }
+          else {
+            sliverList = const SliverToBoxAdapter(child: ProgressWidget());
+          }
+
+          return CustomScrollView(
+            slivers: <Widget>[
+              sliverAppBar,
+              sliverList
+            ],
+          );
+        }
+      )
     );
   }
 }
