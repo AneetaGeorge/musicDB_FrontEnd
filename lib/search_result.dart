@@ -5,6 +5,7 @@ import 'package:music_db/repository/artist_repo.dart';
 import 'package:music_db/widgets/album_widget.dart';
 // import 'package:music_db/widgets/artist_widget.dart';
 import 'package:music_db/widgets/progress_widget.dart';
+import 'package:collection/collection.dart';
 
 class SearchResult extends StatefulWidget {
   final String keyword;
@@ -57,12 +58,31 @@ class _SearchResultState extends State<SearchResult> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           Widget sliverList;
           if (snapshot.hasData) {
+            final groupedReleases = groupBy(snapshot.data!, (ReleaseGroup releaseGroup ) => releaseGroup.primaryType);
+
             sliverList = SliverList(
                 delegate: SliverChildBuilderDelegate((BuildContext ctx, int index)
                           {
-                            return AlbumWidget(album: snapshot.data![index]);
+                            String? category = groupedReleases.keys.elementAt(index);
+                            List itemsInCategory = groupedReleases[category]!;
+
+                            return ExpansionTile(
+                              title: Text(category!, style: const TextStyle(fontWeight: FontWeight.bold)),
+                              children: [
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: const ClampingScrollPhysics(),
+                                  itemCount: itemsInCategory.length,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    ReleaseGroup item = itemsInCategory[index];
+                                    // Return a widget representing the item
+                                    return AlbumWidget(
+                                      album: item, );
+                                  }, ),
+                              ], );
                           },
-                          childCount: snapshot.data!.length)
+
+                  childCount: groupedReleases.length)
             );
           }
           else if (snapshot.hasError) {
