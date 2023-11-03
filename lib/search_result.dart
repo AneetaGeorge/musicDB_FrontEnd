@@ -64,22 +64,24 @@ class _SearchResultState extends State<SearchResult> {
                 delegate: SliverChildBuilderDelegate((BuildContext ctx, int index)
                           {
                             String? category = groupedReleases.keys.elementAt(index);
-                            List itemsInCategory = groupedReleases[category]!;
 
-                            return ExpansionTile(
-                              title: Text(category!, style: const TextStyle(fontWeight: FontWeight.bold)),
-                              children: [
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: const ClampingScrollPhysics(),
-                                  itemCount: itemsInCategory.length,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    ReleaseGroup item = itemsInCategory[index];
-                                    // Return a widget representing the item
-                                    return AlbumWidget(
-                                      album: item, );
-                                  }, ),
-                              ], );
+                            if (category != null) {
+                              List itemsInCategory = groupedReleases[category]!;
+                              return ExpansionTile(
+                                title: Text(category, style: const TextStyle(fontWeight: FontWeight.bold)),
+                                children: [
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: const ClampingScrollPhysics(),
+                                    itemCount: itemsInCategory.length,
+                                    itemBuilder: (BuildContext context, int index) {
+                                      ReleaseGroup item = itemsInCategory[index];
+                                      // Return a widget representing the item
+                                      return AlbumWidget(
+                                        album: item, );
+                                    }, ),
+                                ], );
+                            }
                           },
 
                   childCount: groupedReleases.length)
