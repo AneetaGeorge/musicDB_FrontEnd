@@ -29,13 +29,15 @@ class _ReleaseWidgetState extends State<ReleaseWidget> {
       child: Row(
         children: [
           CoverArtWidget(coverFuture: releaseCoverFuture),
-          Column(
-            children: [
-              Text(widget.release.title),
-              Text('${widget.release.trackCount}'),
-              Text('${widget.release.date}'),
-              Text('${widget.release.country}'),
-            ],
+          Expanded(
+            child: Column(
+              children: [
+                Text(widget.release.title),
+                Text('${widget.release.trackCount}'),
+                Text('${widget.release.date}'),
+                Text('${widget.release.country}'),
+              ],
+            ),
           ),
         ],
       ),

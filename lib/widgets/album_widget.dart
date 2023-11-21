@@ -36,17 +36,18 @@ class _AlbumWidgetState extends State<AlbumWidget> {
             child: Row(
               children: [
                 CoverArtWidget(coverFuture: coverFuture),
-                Container(
-                  padding: const EdgeInsets.only(left: 10.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(widget.album.title,
-                          overflow: TextOverflow.clip,),
-                      Text('${widget.album.firstReleaseDate}'),
-                      Text('${widget.album.primaryType}'),
-                    ],
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.only(left: 10.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(widget.album.title),
+                        Text('${widget.album.firstReleaseDate}'),
+                        Text('${widget.album.primaryType}'),
+                      ],
+                    ),
                   ),
                 )
               ],

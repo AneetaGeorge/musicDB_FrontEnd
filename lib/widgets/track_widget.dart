@@ -32,12 +32,14 @@ class _TrackWidgetState extends State<TrackWidget> {
         child: Row(
           children: [
             CoverArtWidget(coverFuture: trackImgFuture, height: 80, width: 80,),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(widget.track.title),
-                  if(widget.track.length != null) Text(prettyDuration(Duration(milliseconds: widget.track.length!), abbreviated: true, delimiter: ' ', spacer: ''))
-                ],
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.track.title),
+                    if(widget.track.length != null) Text(prettyDuration(Duration(milliseconds: widget.track.length!), abbreviated: true, delimiter: ' ', spacer: ''))
+                  ],
+                ),
               )
           ],
         ),
